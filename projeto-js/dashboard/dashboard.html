@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Produtos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">Dashboard</div>
+
+    <nav class="menu">
+      <a href="#">Produtos</a>
+      <a href="#">Pedidos</a>
+      <a href="#">Clientes</a>
+      <a href="#">Relatórios</a>
+    </nav>
+  </aside>
+
+  <main class="main">
+
+    <header class="header">
+      <input id="searchInput" type="text" placeholder="Buscar produtos...">
+      <button onclick="carregarFormularioCadastrado()">+ Novo Produto</button>
+    </header>
+
+    <section id="statsContainer" class="stats"></section>
+
+    <section id="productsContainer" class="products"></section>
+
+  </main>
+  <script src="dashboard.js"></script>
+
+</body>
+</html>
