@@ -92,12 +92,14 @@ const produtos = [
 ];
 
 function carregarProdutos() {
-    let productsContainer = document.querySelector("#productsContainer")
-    
-    produtos.map((produto) => {
-      productsContainer.innerHTML += `
-      
-        <div class="product-card">
+  let productsContainer = document.querySelector("#productsContainer")
+
+  produtos.map((produto) => {
+    productsContainer.innerHTML += `<div class="product-card">
+    <div class="product-actions">
+        <button class="btn-icon edit">✏️</button>
+        <button onclick="deletarProdutos(${produto.id})" class="btn-icon delete">🗑️</button>
+      </div>
         <img src=${produto.imagem} alt="Produto" class="product-image">
 
         <div class="product-content">
@@ -119,7 +121,7 @@ function carregarProdutos() {
         </div>
      </div>
       `
-    });
+  });
 }
 carregarProdutos()
 
@@ -133,41 +135,41 @@ function carregarFormularioCadastrado() {
             <button type="button" class="btn-close" id="btnFechar" onclick="fecharFormulario()">✕</button>
             <div class="form-group">
             <label>Nome</label>
-            <input type="text" placeholder="Nome do produto">
+            <input type="text" placeholder="Nome do produto" id="inputNome">
             </div>
 
             <div class="form-group">
             <label>Imagem (URL)</label>
-            <input type="text" placeholder="https://...">
+            <input type="text" placeholder="https://..." id="inputImagem">
             </div>
 
             <div class="form-group">
             <label>Descrição</label>
-            <textarea rows="3" placeholder="Descrição..."></textarea>
+            <textarea rows="3" placeholder="Descrição..." id="inputDescricao"></textarea>
             </div>
 
             <div class="form-row">
             <div class="form-group">
                 <label>Preço</label>
-                <input type="number" placeholder="0.00">
+                <input type="number" placeholder="0.00" id="inputPreco">
             </div>
             <div class="form-group">
                 <label>Avaliação</label>
-                <input type="number" step="0.1" min="0" max="5" placeholder="0.0">
+                <input type="number" step="0.1" min="0" max="5" placeholder="0.0 - 5.0" id="inputAvaliacao">
             </div>
             </div>
 
             <div class="form-group">
             <label>Localidade</label>
-            <input type="text" placeholder="Cidade - Estado">
+            <input type="text" placeholder="Cidade - Estado" id="inputEstado">
             </div>
 
-            <button type="submit" class="btn-submit">Cadastrar</button>
+            <button type="submit" class="btn-submit" onclick="cadastrarProduto()">Cadastrar</button>
         </form>
         </div>
   `
   div.classList.add("identificadora")
-body.appendChild(div)
+  body.appendChild(div)
 }
 
 
@@ -176,3 +178,60 @@ function fecharFormulario() {
   let identificadora = document.querySelector(".identificadora")
   body.removeChild(identificadora)
 }
+
+function cadastrarProduto() {
+
+  let nome = document.querySelector("#inputNome").value
+  let imagem = document.querySelector("#inputImagem").value
+  let descricao = document.querySelector("#inputDescricao").value
+  let preco = document.querySelector("#inputPreco").value
+  let estado = document.querySelector("#inputEstado").value
+  let avaliacao = document.querySelector("#inputAvaliacao").value
+
+  let productsContainer = document.querySelector("#productsContainer")
+
+  if (!nome || !imagem || !descricao || !preco || !estado || !avaliacao) {
+
+    let identificadorP = document.querySelector(".identificador")
+
+    if (identificadorP === null) {
+
+      let productForm = document.querySelector(".product-form")
+      let p = document.createElement("p")
+      p.classList.add("identificador")
+      p.innerText = "Por favor, preencha todos os campos."
+      p.style.color = "red"
+      productForm.appendChild(p)
+      return
+    }
+    return
+  }
+
+  let novoProduto = {
+    id: produtos.length + 1,
+    nome: nome,
+    imagem: imagem,
+    descricao: descricao,
+    valor: parseFloat(preco),
+    localidade: estado,
+    avaliacao: parseFloat(avaliacao)
+
+  }
+
+  produtos.push(novoProduto)
+  productsContainer.innerHTML = ""
+  carregarProdutos()
+  fecharFormulario()
+
+}
+
+function deletarProdutos(id) {
+ let produto = produtos.find((produto) => produto.id === id)
+ console.log(produto);
+ produtos.splice(produtos.id, 1)
+ let productsContainer = document.querySelector("#productsContainer")
+ productsContainer.innerHTML = ""
+ carregarProdutos()
+}
+
+ 

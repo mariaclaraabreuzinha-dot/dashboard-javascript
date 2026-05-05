@@ -18,7 +18,7 @@ body {
 
 .sidebar {
   width: 240px;
-  height: 125vh;
+  height: 191vh;
   background: #111c44;
   padding: 20px;
   display: flex;
@@ -344,6 +344,49 @@ body {
   color: #f1f5f9;
 }
 
+
+.product-card {
+  position: relative; /* importante pra posicionar os ícones */
+}
+
+/* container dos ícones */
+.product-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+/* botão base */
+.btn-icon {
+  background: rgba(15, 23, 42, 0.8);
+  border: none;
+  border-radius: 6px;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #e2e8f0;
+  transition: 0.2s;
+}
+
+/* hover geral */
+.btn-icon:hover {
+  transform: scale(1.1);
+}
+
+/* editar */
+.btn-icon.edit:hover {
+  background: #3b82f6;
+  color: white;
+}
+
+/* excluir */
+.btn-icon.delete:hover {
+  background: #ef4444;
+  color: white;
+}
 
 
 
